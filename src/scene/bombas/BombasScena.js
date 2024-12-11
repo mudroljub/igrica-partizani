@@ -68,8 +68,8 @@ export default class BombasScena extends Scena {
     return 'Bombaš'
   }
 
-  constructor() {
-    super()
+  constructor(...args) {
+    super(...args)
     this.dodaj(pozadina, bunker, bombas)
     praviPrepreke()
   }
