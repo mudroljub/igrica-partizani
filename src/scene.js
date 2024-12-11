@@ -1,5 +1,3 @@
-import unidecode from 'unidecode'
-
 import BombasScena from './scene/bombas/BombasScena.js'
 import NemciIzRovova from './scene/rovovi/NemciIzRovova.js'
 import Avionce1942 from './scene/avionce1942/Avionce1942.js'
@@ -23,8 +21,9 @@ import RanjenikPaljba from './scene/ranjenik/RanjenikPaljba.js'
 // za spajanje
 import JasenovacScena from './scene/tenkovska/JasenovacScena.js'
 import TenkOdozgoScena from './scene/tenkovska/TenkOdozgoScena.js'
+import MainMenu from './MainMenu.js'
 
-const scene = [
+const scene = {
   BombasScena,
   NemciIzRovova,
   Avionce1942,
@@ -37,14 +36,8 @@ const scene = [
   Scena1944,
   TenkicIde,
   TenkiciScena,
-  RanjenikScena
-]
-const rute = {}
-
-const toUrl = naziv => {
-  return unidecode(naziv).replace(/\s+/g, '-').toLowerCase()
+  RanjenikScena,
+  MainMenu
 }
 
-scene.map(scena => rute[toUrl(scena.naziv)] = scena)
-
-export default rute
+export default scene

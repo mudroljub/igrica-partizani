@@ -23,9 +23,9 @@ Browser će se automatski osvežavati svaki put kada sačuvaš izmenu.
 
 P.S. ako izbacuje grešku proveri jel već pokrenut webpack-dev-server.
 
-## Uraditi:
-- odvojiti vaznije igre (1944, tenkiće i sl.)
-- napraviti Kameru
+## TODO:
+
+- upozorenje na back napuštate igru
 
 ### Faza 1: refaktor i sredjivanje
 - Avionce: promeniti zvuk motora

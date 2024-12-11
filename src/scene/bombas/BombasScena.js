@@ -27,7 +27,7 @@ let poruka = ''
 
 /*** INIT ***/
 
-const sablon = () => {
+const sablon = (manager) => {
   const izborCss = prikaziMeni ? 'block' : 'none'
   const prozorce = `
     <div class='prozorce centar ${izborCss}'>
@@ -50,7 +50,6 @@ const sablon = () => {
   `
 }
 
-const ui = new UI(sablon, 'ui')
 const vreme = new Vreme()
 const pozadina = new Pozadina(slikaBeton)
 const bombas = new Bombas(slikaBombas, 50, 55)
@@ -70,6 +69,7 @@ export default class BombasScena extends Scena {
 
   constructor(...args) {
     super(...args)
+    this.ui = new UI(() => sablon(this.manager), 'ui')
     this.dodaj(pozadina, bunker, bombas)
     praviPrepreke()
   }
@@ -84,7 +84,7 @@ export default class BombasScena extends Scena {
 
   render() {
     super.render()
-    ui.render()
+    this.ui.render()
   }
 
   proveriPobedu() {

@@ -1,4 +1,4 @@
-import scene from './rute.js'
+import scene from './scene.js'
 
 export default class SceneManager {
     constructor() {
@@ -9,11 +9,11 @@ export default class SceneManager {
         SceneManager.instance = this
     }
 
-    start(name) {
+    start(key) {
         if (this.currentScene) {
             this.currentScene.end()
         }
-        this.currentScene = new scene[name](this)
+        this.currentScene = new scene[key](this)
         this.currentScene.start()
     }
 }
