@@ -30,7 +30,7 @@ export default class MainMenu extends Scena {
   pustiScenu(e) {
     if (!e.target.classList.contains('js-start')) return
 
-    this.manager.start(new scene[e.target.value](this.manager))
+    this.manager.start(e.target.value)
   }
 
   end() {
