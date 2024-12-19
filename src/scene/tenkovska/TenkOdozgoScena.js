@@ -15,10 +15,6 @@ const tenk = new TenkIgracOdozgo()
 /*** EXPORT ***/
 
 export default class TenkOdozgoScena extends Scena {
-  static get naziv() {
-    return 'Tenk odozgo'
-  }
-
   update() {
     pozadina.update()
     tenk.update()

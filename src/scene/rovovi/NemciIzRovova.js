@@ -27,10 +27,6 @@ const pozadina = new Pozadina(slikaPozadina)
 /*** EXPORT ***/
 
 export default class NemciIzRovova extends Scena {
-  static get naziv() {
-    return 'Nemci iz rovova'
-  }
-
   constructor() {
     super()
     this.ui = new UI(sablon)

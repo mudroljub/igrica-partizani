@@ -16,10 +16,6 @@ const sablon = () => {
 }
 
 export default class TopScena extends Scena {
-  static get naziv() {
-    return 'Artiljerija'
-  }
-
   constructor() {
     super()
     haubica = new Top()

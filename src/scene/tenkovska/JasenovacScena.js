@@ -16,10 +16,6 @@ const zica = new Predmet(slikaZica)
 /*** EXPORT ***/
 
 export default class JasenovacScena extends Scena {
-  static get naziv() {
-    return 'Bekstvo iz Jasenovca'
-  }
-
   constructor() {
     super()
     zica.polozaj(400, 100)

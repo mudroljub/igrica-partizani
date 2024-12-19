@@ -15,10 +15,6 @@ let minobacac
 let tlo
 
 export default class MinobacacScena extends Scena {
-  static get naziv() {
-    return 'Minobacač'
-  }
-
   constructor() {
     super()
     this.init()

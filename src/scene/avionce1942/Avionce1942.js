@@ -43,10 +43,6 @@ const ruina = new Zgrada(nivoTla, slikaRuina)
 let igrac
 
 export default class Avionce1942 extends Scena {
-  static get naziv() {
-    return 'Avionče 1942'
-  }
-
   constructor() {
     super()
     this.nivoTla = nivoTla

@@ -57,8 +57,6 @@ const ranjenik = new Ranjenik()
 const patrola = new Patrola(slikaPatrolaNemci)
 
 export default class RanjenikScena extends Scena {
-  static get naziv() {return 'Ranjenik'}
-
   constructor() {
     super()
     this.ui = new UI(sablon)

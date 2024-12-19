@@ -17,7 +17,7 @@ import slikaBombas from 'slike/2d-bocno/partizani/vojnici/bombasi/partizan-bomba
 
 /*** KONFIG ***/
 
-const ZADATOVREME = 50
+const ZADATO_VREME = 50
 const BROJ_PREPREKA = 10
 const prepreke = []
 let nivo = 1
@@ -49,7 +49,7 @@ const endScreen = (poruka, manager) => {
 const sablon = () => {
   return `
     <main class='centar'>
-      <h1>${BombasScena.naziv}</h1>
+      <h1>Bombaš</h1>
       <h3>Dovedi Žikicu Jovanovića Španca do nemačkog bunkera! </h3>
       <div class='tabela'>
         Nivo: ${nivo} <br>
@@ -73,10 +73,6 @@ const praviPrepreke = () => {
 }
 
 export default class BombasScena extends Scena {
-  static get naziv() {
-    return 'Bombaš'
-  }
-
   constructor(...args) {
     super(...args)
     this.ui = new UI(() => sablon(), 'ui')
@@ -106,7 +102,7 @@ export default class BombasScena extends Scena {
 
   proveriVreme() {
     vremeIgre = vreme.protekloSekundi
-    if (vremeIgre > ZADATOVREME) {
+    if (vremeIgre > ZADATO_VREME) {
       this.zavrsiIgru('Tvoje vremeIgre je isteklo. Igra je završena!')
     }
   }

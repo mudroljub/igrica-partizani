@@ -22,15 +22,11 @@ const ostrvo = new Ostrvo(brzinaPozadine)
 const igrac = new Avionce()
 
 export default class Scena1944 extends Scena {
-  static get naziv() {
-    return 'Avionče 1944'
-  }
-
   constructor() {
     super()
     const sablon = () => {
       return `
-        <h1>${Scena1944.naziv}</h1>
+        <h1>Avionče 1944</h1>
         Poeni: ${poeni}<br>
         Životi: ${zivoti}<br>
         Meci: ${igrac.preostaloMetaka()}

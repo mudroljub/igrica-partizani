@@ -29,10 +29,6 @@ const sablon = () => {
 const ui = new UI(sablon, 'ui')
 
 export default class MainMenu extends Scena {
-  static get naziv() {
-    return 'Glavni meni'
-  }
-
   constructor(manager) {
     super()
     this.manager = manager

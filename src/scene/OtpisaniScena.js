@@ -13,7 +13,7 @@ import zvukOtpisani from 'zvuci/otpisani.mp3'
 
 const sablon = () => `
 <main class='centar'>
-  <h1>${OtpisaniScena.naziv}</h1>
+  <h1>Ubij okupatora!</h1>
   <p>Oslobođenje se bliži</p>
 </main>
 `
@@ -26,10 +26,6 @@ const strazar = new Okupator()
 /*** EXPORT ***/
 
 export default class OtpisaniScena extends Scena {
-  static get naziv() {
-    return 'Ubij okupatora!'
-  }
-
   constructor() {
     super()
     mish.dodajNishan()
