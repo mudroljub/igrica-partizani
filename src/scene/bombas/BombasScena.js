@@ -33,13 +33,15 @@ const endScreen = (poruka, manager) => {
   p.textContent = poruka
   div.appendChild(p)
 
-  const igrOpet = document.createElement('button')
-  igrOpet.textContent = 'Igraj opet'
-  div.appendChild(igrOpet)
+  const btn1 = document.createElement('button')
+  btn1.textContent = 'Igraj opet'
+  btn1.addEventListener('click', () => manager.start('BombasScena'))
+  div.appendChild(btn1)
 
-  const glMeni = document.createElement('button')
-  glMeni.textContent = 'Glavni meni'
-  div.appendChild(glMeni)
+  const btn2 = document.createElement('button')
+  btn2.textContent = 'Glavni meni'
+  btn2.addEventListener('click', () => manager.start('MainMenu'))
+  div.appendChild(btn2)
 
   return div
 }
@@ -120,6 +122,6 @@ export default class BombasScena extends Scena {
 
   zavrsiIgru(text) {
     this.stop()
-    document.body.appendChild(endScreen(text, this.manager))
+    document.body.appendChild(endScreen(text, this.manager)) // BUG: this.manager ne postoji
   }
 }
