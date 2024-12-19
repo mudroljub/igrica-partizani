@@ -1,6 +1,6 @@
 // napraviti css ui i uvek njega koristiti
 // sukcesivno se povećava broj prepreka i težina igre
-  // svaki nivo novi random raspored, igrač igra dok ne izgubi
+// svaki nivo novi random raspored, igrač igra dok ne izgubi
 // minimalno rastojanje bombaša i bunkera?
 // vremenski ograniceno?
 // mitraljez puca iz bunkera, prepreke su zakloni
@@ -22,20 +22,29 @@ const BROJ_PREPREKA = 10
 const prepreke = []
 let nivo = 1
 let vremeIgre = 0
-let prikaziMeni = false
-let poruka = ''
 
 /*** INIT ***/
 
-const sablon = (manager) => {
-  const izborCss = prikaziMeni ? 'block' : 'none'
-  const prozorce = `
-    <div class='prozorce centar ${izborCss}'>
-      <p>${poruka}</p>
-      <a class='pointer'>Igraj opet</a></br>
-      <a class='pointer'>Glavni meni</a>
-    </div>
-  `
+const endScreen = (poruka, manager) => {
+  const div = document.createElement('div')
+  div.className = 'prozorce centar'
+
+  const p = document.createElement('p')
+  p.textContent = poruka
+  div.appendChild(p)
+
+  const igrOpet = document.createElement('button')
+  igrOpet.textContent = 'Igraj opet'
+  div.appendChild(igrOpet)
+
+  const glMeni = document.createElement('button')
+  glMeni.textContent = 'Glavni meni'
+  div.appendChild(glMeni)
+
+  return div
+}
+
+const sablon = () => {
   return `
     <main class='centar'>
       <h1>${BombasScena.naziv}</h1>
@@ -46,7 +55,6 @@ const sablon = (manager) => {
         Prepreke: ${BROJ_PREPREKA}
       </div>
     </main>
-    ${prozorce}
   `
 }
 
@@ -69,7 +77,7 @@ export default class BombasScena extends Scena {
 
   constructor(...args) {
     super(...args)
-    this.ui = new UI(() => sablon(this.manager), 'ui')
+    this.ui = new UI(() => sablon(), 'ui')
     this.dodaj(pozadina, bunker, bombas)
     praviPrepreke()
   }
@@ -111,8 +119,7 @@ export default class BombasScena extends Scena {
   }
 
   zavrsiIgru(text) {
-    poruka = text
-    prikaziMeni = true
     this.stop()
+    document.body.appendChild(endScreen(text, this.manager))
   }
 }

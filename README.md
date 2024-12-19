@@ -27,6 +27,7 @@ P.S. ako izbacuje grešku proveri jel već pokrenut webpack-dev-server.
 
 ## TODO:
 
+- napraviti jasan interfejs za Scene
 - upozorenje na back napuštate igru
 
 ### Faza 1: refaktor i sredjivanje

@@ -19,7 +19,6 @@ const pustiScenu = function(e) {
 const glavniMeni = new UI(sablon, 'ui')
 glavniMeni.render()
 sakrijPlatno()
-
 */
 
 const manager = new SceneManager()
