@@ -30,8 +30,7 @@ const ui = new UI(sablon, 'ui')
 
 export default class MainMenu extends Scena {
   constructor(manager) {
-    super()
-    this.manager = manager
+    super(manager)
     this.pustiScenu = this.pustiScenu.bind(this)
   }
 

@@ -1,4 +1,3 @@
-// napraviti css ui i uvek njega koristiti
 // sukcesivno se povećava broj prepreka i težina igre
 // svaki nivo novi random raspored, igrač igra dok ne izgubi
 // minimalno rastojanje bombaša i bunkera?

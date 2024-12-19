@@ -1,7 +1,6 @@
 
 import {sakrijPlatno, pokaziPlatno} from 'io/platno.js'
 import SceneManager from './SceneManager.js'
-import MainMenu from './MainMenu.js'
 
 /*
 let aktivnaScena = null
@@ -19,8 +18,12 @@ const pustiScenu = function(e) {
 const glavniMeni = new UI(sablon, 'ui')
 glavniMeni.render()
 sakrijPlatno()
+
+- manager treba svakoj sceni
+- ima ga samo MainMenu (prosleđuje mu se ovde)
+- PROBLEM: kako ga proslediti Bombasu?
+- PROBLEM: ne možemo ga proslediti Sceni jer MainMenu nasleđuje Scenu (cirkularna zavisnost)
 */
 
 const manager = new SceneManager()
-const meni = new MainMenu(manager)
-meni.start()
+manager.start('MainMenu')
