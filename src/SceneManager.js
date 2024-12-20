@@ -14,6 +14,6 @@ export default class SceneManager {
             this.currentScene.end()
         }
         this.currentScene = new scene[key](this)
-        this.currentScene.start() // TODO: mozda ovde proslediti sebe
+        this.currentScene.start()
     }
 }
