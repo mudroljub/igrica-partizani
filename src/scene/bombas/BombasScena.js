@@ -81,7 +81,6 @@ export default class BombasScena extends Scena {
 
   update() {
     super.update()
-    // bombas.pratiMisha()
     this.proveriVreme()
     this.proveriPobedu()
     this.proveriPrepreke()
@@ -117,6 +116,6 @@ export default class BombasScena extends Scena {
 
   zavrsiIgru(text) {
     this.stop()
-    document.body.appendChild(endScreen(text, this.manager)) // BUG: this.manager ne postoji
+    this.ui.element.appendChild(endScreen(text, this.manager))
   }
 }
