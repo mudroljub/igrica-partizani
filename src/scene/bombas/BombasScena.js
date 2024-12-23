@@ -93,6 +93,6 @@ export default class BombasScena extends Scena {
   zavrsiIgru(text) {
     this.stop()
     const endScreen = this.manager.endScreen(text, 'BombasScena')
-    this.ui.element.appendChild(endScreen)
+    this.ui.dodaj(endScreen)
   }
 }

@@ -68,8 +68,12 @@ function sablon() {
 /*** EXPORT ***/
 
 export default class NemciIzRovova extends Scena {
-  constructor() {
-    super()
+  constructor(...args) {
+    super(...args)
+    this.init()
+  }
+
+  init() {
     this.ui = new UI(sablon)
     ucitajRekord()
     this.praviSvabe(bliziRovovi, BLIZI_ROVOVI_Y, {sirina: 100, visina: 150, procenatPojavljivanja: 0.003})
@@ -109,13 +113,15 @@ export default class NemciIzRovova extends Scena {
     if (energija < 1) {
       sacuvajRekord()
       this.stop()
-      console.log('Play again...')
-      // document.location.href = ''
+      const endScreen = this.manager.endScreen('Play again...', 'NemciIzRovova')
+      console.log(endScreen) 
+      this.ui.dodaj(endScreen)
     }
   }
 
   end() {
     super.end()
     mish.ukloniNishan()
+    // TODO: ukloni klik
   }
 }
