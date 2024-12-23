@@ -20,7 +20,6 @@ const ZADATO_VREME = 50
 const BROJ_PREPREKA = 10
 const prepreke = []
 let nivo = 1
-let vremeIgre = 0
 
 /*** INIT ***/
 
@@ -45,7 +44,7 @@ const endScreen = (poruka, manager) => {
   return div
 }
 
-const sablon = () => {
+const sablon = (vremeIgre) => {
   return `
     <main class='centar'>
       <h1>Bombaš</h1>
@@ -74,7 +73,13 @@ const praviPrepreke = () => {
 export default class BombasScena extends Scena {
   constructor(...args) {
     super(...args)
-    this.ui = new UI(() => sablon(), 'ui')
+    this.init()
+  }
+
+  init() {
+    this.vremeIgre = 0
+    this.ui = new UI(() => sablon(this.vremeIgre), 'ui')
+    
     this.dodaj(pozadina, bunker, bombas)
     praviPrepreke()
   }
@@ -99,8 +104,8 @@ export default class BombasScena extends Scena {
   }
 
   proveriVreme() {
-    vremeIgre = vreme.protekloSekundi
-    if (vremeIgre > ZADATO_VREME) {
+    this.vremeIgre = vreme.protekloSekundi
+    if (this.vremeIgre > ZADATO_VREME) {
       this.zavrsiIgru('Tvoje vremeIgre je isteklo. Igra je završena!')
     }
   }
