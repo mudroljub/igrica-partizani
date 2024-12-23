@@ -24,6 +24,47 @@ let energija = 100
 
 const pozadina = new Pozadina(slikaPozadina)
 
+/*** FUNKCIJE ***/
+
+function proveriPogotke(rovovi) {
+  for (let i = 0; i < rovovi.length; i++) {
+    if (rovovi[i].jePogodjen()) {
+      rovovi[i].padni()
+      pogoci++
+    }
+  }
+}
+
+function azurirajSvabe(rovovi) {
+  for (let i = 0; i < rovovi.length; i++) {
+    if (rovovi[i].jeSpreman()) {
+      rovovi[i].puca()
+      energija--
+    }
+    rovovi[i].update()
+  }
+}
+
+function ucitajRekord() {
+  rekord = parseInt(localStorage.getItem('svabeRekord'))
+  if (!rekord) rekord = 0
+}
+
+function sacuvajRekord() {
+  if (pogoci > rekord) {
+    console.log('Ubio si ' + pogoci + ' okupatora. To je novi rekord!')
+    localStorage.setItem('svabeRekord', pogoci)
+  }
+}
+
+function sablon() {
+  return `
+    Pogoci: ${pogoci} <br>
+    Energija: ${energija} <br>
+    Rekord: ${rekord}
+  `
+}
+
 /*** EXPORT ***/
 
 export default class NemciIzRovova extends Scena {
@@ -77,45 +118,4 @@ export default class NemciIzRovova extends Scena {
     super.end()
     mish.ukloniNishan()
   }
-}
-
-/*** FUNKCIJE ***/
-
-function proveriPogotke(rovovi) {
-  for (let i = 0; i < rovovi.length; i++) {
-    if (rovovi[i].jePogodjen()) {
-      rovovi[i].padni()
-      pogoci++
-    }
-  }
-}
-
-function azurirajSvabe(rovovi) {
-  for (let i = 0; i < rovovi.length; i++) {
-    if (rovovi[i].jeSpreman()) {
-      rovovi[i].puca()
-      energija--
-    }
-    rovovi[i].update()
-  }
-}
-
-function ucitajRekord() {
-  rekord = parseInt(localStorage.getItem('svabeRekord'))
-  if (!rekord) rekord = 0
-}
-
-function sacuvajRekord() {
-  if (pogoci > rekord) {
-    console.log('Ubio si ' + pogoci + ' okupatora. To je novi rekord!')
-    localStorage.setItem('svabeRekord', pogoci)
-  }
-}
-
-function sablon() {
-  return `
-    Pogoci: ${pogoci} <br>
-    Energija: ${energija} <br>
-    Rekord: ${rekord}
-  `
 }

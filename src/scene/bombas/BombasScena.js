@@ -14,34 +14,9 @@ import Prepreka from './Prepreka'
 import slikaBeton from 'slike/teksture/beton.gif'
 import slikaBombas from 'slike/2d-bocno/partizani/vojnici/bombasi/partizan-bombas.gif'
 
-/*** KONFIG ***/
-
 const ZADATO_VREME = 50
 const BROJ_PREPREKA = 10
 let nivo = 1
-
-/*** INIT ***/
-
-const endScreen = (poruka, manager) => {
-  const div = document.createElement('div')
-  div.className = 'prozorce centar'
-
-  const p = document.createElement('p')
-  p.textContent = poruka
-  div.appendChild(p)
-
-  const btn1 = document.createElement('button')
-  btn1.textContent = 'Igraj opet'
-  btn1.addEventListener('click', () => manager.start('BombasScena'))
-  div.appendChild(btn1)
-
-  const btn2 = document.createElement('button')
-  btn2.textContent = 'Glavni meni'
-  btn2.addEventListener('click', () => manager.start('MainMenu'))
-  div.appendChild(btn2)
-
-  return div
-}
 
 const sablon = (vremeIgre) => {
   return `
@@ -117,6 +92,7 @@ export default class BombasScena extends Scena {
 
   zavrsiIgru(text) {
     this.stop()
-    this.ui.element.appendChild(endScreen(text, this.manager))
+    const endScreen = this.manager.endScreen(text, 'BombasScena')
+    this.ui.element.appendChild(endScreen)
   }
 }
