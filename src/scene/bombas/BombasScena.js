@@ -18,7 +18,6 @@ import slikaBombas from 'slike/2d-bocno/partizani/vojnici/bombasi/partizan-bomba
 
 const ZADATO_VREME = 50
 const BROJ_PREPREKA = 10
-
 let nivo = 1
 
 /*** INIT ***/
@@ -58,12 +57,6 @@ const sablon = (vremeIgre) => {
   `
 }
 
-const vreme = new Vreme()
-const pozadina = new Pozadina(slikaBeton)
-const bombas = new Bombas(slikaBombas, 50, 55)
-const bunker = new Bunker(112, 103)
-bunker.nemojPreko(bombas)
-
 export default class BombasScena extends Scena {
   constructor(...args) {
     super(...args)
@@ -71,17 +64,20 @@ export default class BombasScena extends Scena {
   }
 
   init() {
-    this.vremeIgre = 0
-    this.ui = new UI(() => sablon(this.vremeIgre), 'ui')
-    
-    this.dodaj(pozadina, bunker, bombas)
+    this.vreme = new Vreme()
+    this.ui = new UI(() => sablon(this.vreme.protekloSekundi), 'ui')
+    const pozadina = new Pozadina(slikaBeton)
+    this.bombas = new Bombas(slikaBombas, 50, 55)
+    this.bunker = new Bunker(112, 103)
+    this.bunker.nemojPreko(this.bombas)
+    this.dodaj(pozadina, this.bunker, this.bombas)
     this.praviPrepreke()
   }
 
   praviPrepreke() {
     this.prepreke = []
     for (let i = 0; i < BROJ_PREPREKA; i++) {
-      this.prepreke[i] = new Prepreka([bunker, bombas])
+      this.prepreke[i] = new Prepreka([this.bunker, this.bombas])
     }
   }  
 
@@ -98,22 +94,21 @@ export default class BombasScena extends Scena {
   }
 
   proveriPobedu() {
-    if (bombas.razmakDo(bunker) < 75) {
-      bunker.gori()
+    if (this.bombas.razmakDo(this.bunker) < 75) {
+      this.bunker.gori()
       this.zavrsiIgru('Neprijateljski bunker je uništen.')
     }
   }
 
   proveriVreme() {
-    this.vremeIgre = vreme.protekloSekundi
-    if (this.vremeIgre > ZADATO_VREME) {
+    if (this.vreme.protekloSekundi > ZADATO_VREME) {
       this.zavrsiIgru('Tvoje vremeIgre je isteklo. Igra je završena!')
     }
   }
 
   proveriPrepreke() {
     for (let i = 0; i < BROJ_PREPREKA; i++) {
-      if (bombas.sudara(this.prepreke[i])) {
+      if (this.bombas.sudara(this.prepreke[i])) {
         this.zavrsiIgru('Poginuo si. Igra je završena.')
       }
       this.prepreke[i].update()
