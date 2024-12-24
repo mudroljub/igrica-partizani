@@ -42,7 +42,7 @@ export default class BombasScena extends Scena {
 
   init() {
     this.vreme = new Vreme()
-    this.ui = new UI(() => sablon(this.vreme.protekloSekundi), 'ui')
+    this.ui = new UI(() => sablon(this.vreme.protekloSekundi))
     const pozadina = new Pozadina(slikaBeton)
     this.bombas = new Bombas(slikaBombas, 50, 55)
     this.bunker = new Bunker(112, 103)
@@ -94,6 +94,6 @@ export default class BombasScena extends Scena {
 
   zavrsiIgru(text) {
     this.stop()
-    this.ui.endScreen(this.manager, text, 'BombasScena')
+    this.ui.endScreen(this.manager, text, this.constructor.name)
   }
 }

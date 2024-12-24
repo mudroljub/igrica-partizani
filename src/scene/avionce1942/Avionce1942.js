@@ -1,5 +1,4 @@
-// avion Potez 25
-// dodaj prozor na smrt
+// avion Potez 25 
 // letenje unazad srediti
 // dodati pobedu?
 // da izbegava neke prepreke, možda zgrade
@@ -8,6 +7,7 @@ import * as $ from 'konstante'
 import tipke from 'io/tipke'
 import platno from 'io/platno'
 import Scena from 'core/Scena'
+import UI from 'core/UI'
 import AvionIgrac from './AvionIgrac'
 import Hummel from './Hummel'
 import Zgrada from './Zgrada'
@@ -35,12 +35,13 @@ const MAX_DIGNUTOST = 5555
 /*** INIT ***/
 
 export default class Avionce1942 extends Scena {
-  constructor() {
-    super()
+  constructor(...args) {
+    super(...args)
     this.init()
   }
 
   init() {
+    this.ui = new UI()
     this.nivoTla = platno.height
     this.brzinaScene = 0
     this.dignutostScene = 0
@@ -113,7 +114,12 @@ export default class Avionce1942 extends Scena {
     this.igrac.sviOstali(predmet => {
       if (predmet.mrtav) predmet.dx = PARALAX_1 - this.brzinaScene
     })
-    if (this.igrac.mrtav && this.dignutostScene > 0) this.dizePredmete(-DIZAJ)
+    if (this.igrac.mrtav && this.dignutostScene > 0) 
+      this.dizePredmete(-DIZAJ)
+
+    if (this.igrac.mrtav) {
+      this.ui.endScreen(this.manager, undefined, this.constructor.name)
+    }
   }
 
   proveriTlo() {

@@ -96,7 +96,7 @@ export default class NemciIzRovova extends Scena {
       poruka += `Ubio si ${this.pogoci} okupatora. To je novi rekord!`
       localStorage.setItem('svabeRekord', this.pogoci)
     }
-    this.ui.endScreen(this.manager, poruka, 'NemciIzRovova')
+    this.ui.endScreen(this.manager, poruka, this.constructor.name)
   }
 
   ucitajRekord() {
