@@ -15,8 +15,8 @@ let minobacac
 let tlo
 
 export default class MinobacacScena extends Scena {
-  constructor() {
-    super()
+  constructor(...args) {
+    super(...args)
     this.init()
   }
 

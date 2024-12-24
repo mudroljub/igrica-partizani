@@ -7,7 +7,6 @@ import * as $ from 'konstante'
 import tipke from 'io/tipke'
 import platno from 'io/platno'
 import Scena from 'core/Scena'
-import UI from 'core/UI'
 import AvionIgrac from './AvionIgrac'
 import Hummel from './Hummel'
 import Zgrada from './Zgrada'
@@ -41,7 +40,6 @@ export default class Avionce1942 extends Scena {
   }
 
   init() {
-    this.ui = new UI()
     this.nivoTla = platno.height
     this.brzinaScene = 0
     this.dignutostScene = 0
@@ -118,7 +116,7 @@ export default class Avionce1942 extends Scena {
       this.dizePredmete(-DIZAJ)
 
     if (this.igrac.mrtav) {
-      this.ui.endScreen(this.manager, undefined, this.constructor.name)
+      this.ui.endScreen(undefined, this.constructor.name)
     }
   }
 

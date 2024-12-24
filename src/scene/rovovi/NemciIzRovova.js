@@ -4,7 +4,6 @@
 // da se ne sudaraju?
 
 import mish from 'io/mish'
-import UI from 'core/UI'
 import Scena from 'core/Scena'
 import Pozadina from 'core/Pozadina'
 import Svabo from './Svabo'
@@ -25,7 +24,6 @@ export default class NemciIzRovova extends Scena {
     this.energija = 100
     this.bliziRovovi = new Array(10)
     this.daljiRovovi = new Array(10)
-    this.ui = new UI(() => this.sablon())
     this.ucitajRekord()
     this.praviSvabe(this.bliziRovovi, BLIZI_ROVOVI_Y, {sirina: 100, visina: 150, procenatPojavljivanja: 0.003})
     this.praviSvabe(this.daljiRovovi, DALJI_ROVOVI_Y, {sirina: 50, visina: 75, procenatPojavljivanja: 0.002})
@@ -48,10 +46,6 @@ export default class NemciIzRovova extends Scena {
     this.azurirajSvabe(this.bliziRovovi)
     this.azurirajSvabe(this.daljiRovovi)
     this.proveriKraj()
-  }
-
-  render() {
-    this.ui.render()
   }
 
   dodajKlik() {
@@ -96,7 +90,7 @@ export default class NemciIzRovova extends Scena {
       poruka += `Ubio si ${this.pogoci} okupatora. To je novi rekord!`
       localStorage.setItem('svabeRekord', this.pogoci)
     }
-    this.ui.endScreen(this.manager, poruka, this.constructor.name)
+    this.ui.endScreen(poruka, this.constructor.name)
   }
 
   ucitajRekord() {

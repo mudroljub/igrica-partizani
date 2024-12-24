@@ -1,26 +1,20 @@
 import Scena from 'core/Scena'
-import UI from 'core/UI'
 import Top from './Top'
 
-// top je rezervisano
-let haubica
-let interfejs
-
-const sablon = () => {
-  return `
-  <div>
-    ugao: ${haubica.ugao}<br>
-    brzina: ${haubica.brzina}
-  </div>
-  `
-}
-
 export default class TopScena extends Scena {
-  constructor() {
-    super()
-    haubica = new Top()
-    interfejs = new UI(sablon)
-    this.dodaj(haubica, interfejs)
+  constructor(...args) {
+    super(...args)
+    this.top = new Top()
+    this.dodaj(this.top)
     this.start()
   }
+
+  sablon() {
+    return `
+    <div>
+      ugao: ${this.top.ugao}<br>
+      brzina: ${this.top.brzina}
+    </div>
+    `
+  }  
 }

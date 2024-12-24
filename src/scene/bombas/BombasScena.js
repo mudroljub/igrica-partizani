@@ -9,7 +9,6 @@
 import Scena from 'core/Scena'
 import Vreme from 'core/Vreme'
 import Pozadina from 'core/Pozadina'
-import UI from 'core/UI'
 import Bombas from './Bombas'
 import Bunker from './Bunker'
 import Prepreka from './Prepreka'
@@ -20,20 +19,6 @@ const ZADATO_VREME = 50
 const BROJ_PREPREKA = 10
 let nivo = 1
 
-const sablon = (vremeIgre) => {
-  return `
-    <main class='centar'>
-      <h1>Bombaš</h1>
-      <h3>Dovedi Žikicu Jovanovića Španca do nemačkog bunkera! </h3>
-      <div class='tabela'>
-        Nivo: ${nivo} <br>
-        Vreme: ${Math.floor(vremeIgre)} <br>
-        Prepreke: ${BROJ_PREPREKA}
-      </div>
-    </main>
-  `
-}
-
 export default class BombasScena extends Scena {
   constructor(...args) {
     super(...args)
@@ -42,7 +27,6 @@ export default class BombasScena extends Scena {
 
   init() {
     this.vreme = new Vreme()
-    this.ui = new UI(() => sablon(this.vreme.protekloSekundi))
     const pozadina = new Pozadina(slikaBeton)
     this.bombas = new Bombas(slikaBombas, 50, 55)
     this.bunker = new Bunker(112, 103)
@@ -63,11 +47,6 @@ export default class BombasScena extends Scena {
     this.proveriVreme()
     this.proveriPobedu()
     this.proveriPrepreke()
-  }
-
-  render() {
-    super.render()
-    this.ui.render()
   }
 
   proveriPobedu() {
@@ -94,6 +73,20 @@ export default class BombasScena extends Scena {
 
   zavrsiIgru(text) {
     this.stop()
-    this.ui.endScreen(this.manager, text, this.constructor.name)
+    this.ui.endScreen(text, this.constructor.name)
   }
+
+  sablon() {
+    return `
+      <main class='centar'>
+        <h1>Bombaš</h1>
+        <h3>Dovedi Žikicu Jovanovića Španca do nemačkog bunkera! </h3>
+        <div class='tabela'>
+          Nivo: ${nivo} <br>
+          Vreme: ${Math.floor(this.vreme.protekloSekundi)} <br>
+          Prepreke: ${BROJ_PREPREKA}
+        </div>
+      </main>
+    `
+  }  
 }

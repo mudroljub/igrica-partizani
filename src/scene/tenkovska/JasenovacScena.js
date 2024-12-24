@@ -16,8 +16,8 @@ const zica = new Predmet(slikaZica)
 /*** EXPORT ***/
 
 export default class JasenovacScena extends Scena {
-  constructor() {
-    super()
+  constructor(...args) {
+    super(...args)
     zica.polozaj(400, 100)
   }
 

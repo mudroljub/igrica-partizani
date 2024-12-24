@@ -1,10 +1,9 @@
+import UI from 'core/UI'
 import scene from './scene.js'
 
 export default class SceneManager {
     constructor() {
-        if (SceneManager.instance) {
-            return SceneManager.instance
-        }
+        if (SceneManager.instance) return SceneManager.instance
         this.currentScene = null
         SceneManager.instance = this
     }
@@ -13,7 +12,8 @@ export default class SceneManager {
         if (this.currentScene) {
             this.currentScene.end()
         }
-        this.currentScene = new scene[key](this)
+        const novaScena = new scene[key](new UI(this))
+        this.currentScene = novaScena
         this.currentScene.start()
     }   
 }

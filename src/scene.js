@@ -27,7 +27,7 @@ const scene = {
   BombasScena,
   NemciIzRovova,
   Avionce1942,
-  // JasenovacScena,
+  JasenovacScena,
   TenkOdozgoScena,
   TopScena,
   MinobacacScena,
