@@ -116,7 +116,7 @@ export default class Avionce1942 extends Scena {
       this.dizePredmete(-DIZAJ)
 
     if (this.igrac.mrtav) {
-      this.ui.endScreen(undefined, this.constructor.name)
+      this.endScreen()
     }
   }
 

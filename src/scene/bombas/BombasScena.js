@@ -73,7 +73,7 @@ export default class BombasScena extends Scena {
 
   zavrsiIgru(text) {
     this.stop()
-    this.ui.endScreen(text, this.constructor.name)
+    this.endScreen(text)
   }
 
   sablon() {
