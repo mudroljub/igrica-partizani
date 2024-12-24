@@ -10,62 +10,8 @@ import Pozadina from 'core/Pozadina'
 import Svabo from './Svabo'
 import slikaPozadina from 'slike/teksture/suva-trava.jpg'
 
-/*** KONFIG ***/
-
 const DALJI_ROVOVI_Y = 150
 const BLIZI_ROVOVI_Y = 300
-const bliziRovovi = new Array(10)
-const daljiRovovi = new Array(10)
-let pogoci = 0
-let rekord = 0
-let energija = 100
-
-/*** LOGIKA IGRE ***/
-
-const pozadina = new Pozadina(slikaPozadina)
-
-/*** FUNKCIJE ***/
-
-function proveriPogotke(rovovi) {
-  for (let i = 0; i < rovovi.length; i++) {
-    if (rovovi[i].jePogodjen()) {
-      rovovi[i].padni()
-      pogoci++
-    }
-  }
-}
-
-function azurirajSvabe(rovovi) {
-  for (let i = 0; i < rovovi.length; i++) {
-    if (rovovi[i].jeSpreman()) {
-      rovovi[i].puca()
-      energija--
-    }
-    rovovi[i].update()
-  }
-}
-
-function ucitajRekord() {
-  rekord = parseInt(localStorage.getItem('svabeRekord'))
-  if (!rekord) rekord = 0
-}
-
-function sacuvajRekord() {
-  if (pogoci > rekord) {
-    console.log('Ubio si ' + pogoci + ' okupatora. To je novi rekord!')
-    localStorage.setItem('svabeRekord', pogoci)
-  }
-}
-
-function sablon() {
-  return `
-    Pogoci: ${pogoci} <br>
-    Energija: ${energija} <br>
-    Rekord: ${rekord}
-  `
-}
-
-/*** EXPORT ***/
 
 export default class NemciIzRovova extends Scena {
   constructor(...args) {
@@ -74,19 +20,33 @@ export default class NemciIzRovova extends Scena {
   }
 
   init() {
-    this.ui = new UI(sablon)
-    ucitajRekord()
-    this.praviSvabe(bliziRovovi, BLIZI_ROVOVI_Y, {sirina: 100, visina: 150, procenatPojavljivanja: 0.003})
-    this.praviSvabe(daljiRovovi, DALJI_ROVOVI_Y, {sirina: 50, visina: 75, procenatPojavljivanja: 0.002})
+    this.pogoci = 0
+    this.rekord = 0
+    this.energija = 100
+    this.bliziRovovi = new Array(10)
+    this.daljiRovovi = new Array(10)
+    this.ui = new UI(() => this.sablon())
+    this.ucitajRekord()
+    this.praviSvabe(this.bliziRovovi, BLIZI_ROVOVI_Y, {sirina: 100, visina: 150, procenatPojavljivanja: 0.003})
+    this.praviSvabe(this.daljiRovovi, DALJI_ROVOVI_Y, {sirina: 50, visina: 75, procenatPojavljivanja: 0.002})
     mish.dodajNishan()
     this.dodajKlik()
+    this.pozadina = new Pozadina(slikaPozadina)
   }
 
+  sablon() {
+    return `
+      Pogoci: ${this.pogoci} <br>
+      Energija: ${this.energija} <br>
+      Rekord: ${this.rekord}
+    `
+  }
+  
   update() {
     this.cisti()
-    pozadina.update()
-    azurirajSvabe(bliziRovovi)
-    azurirajSvabe(daljiRovovi)
+    this.pozadina.update()
+    this.azurirajSvabe(this.bliziRovovi)
+    this.azurirajSvabe(this.daljiRovovi)
     this.proveriKraj()
   }
 
@@ -96,10 +56,19 @@ export default class NemciIzRovova extends Scena {
 
   dodajKlik() {
     document.onclick = () => {
-      const ciljaniRovovi = (mish.y <= DALJI_ROVOVI_Y) ? daljiRovovi : bliziRovovi
-      proveriPogotke(ciljaniRovovi)
+      const ciljaniRovovi = (mish.y <= DALJI_ROVOVI_Y) ? this.daljiRovovi : this.bliziRovovi
+      this.proveriPogotke(ciljaniRovovi)
     }
   }
+
+  proveriPogotke(rovovi) {
+    for (let i = 0; i < rovovi.length; i++) {
+      if (rovovi[i].jePogodjen()) {
+        rovovi[i].padni()
+        this.pogoci++
+      }
+    }
+  }  
 
   praviSvabe(rovovi, y, params) {
     for (let i = 0; i < rovovi.length; i++) {
@@ -109,14 +78,32 @@ export default class NemciIzRovova extends Scena {
     }
   }
 
-  proveriKraj() {
-    if (energija < 1) {
-      this.stop()
-      sacuvajRekord()
-      this.ui.endScreen(this.manager, 'Play again...', 'NemciIzRovova')
+  azurirajSvabe(rovovi) {
+    for (let i = 0; i < rovovi.length; i++) {
+      if (rovovi[i].jeSpreman()) {
+        rovovi[i].puca()
+        this.energija--
+      }
+      rovovi[i].update()
     }
+  }  
+
+  proveriKraj() {
+    if (this.energija > 0) return
+    this.stop()
+    let poruka = 'Hrabro si pao. '
+    if (this.pogoci > this.rekord) {
+      poruka += 'Ubio si ' + this.pogoci + ' okupatora. To je novi rekord!'
+      localStorage.setItem('svabeRekord', this.pogoci)
+    }
+    this.ui.endScreen(this.manager, poruka, 'NemciIzRovova')
   }
 
+  ucitajRekord() {
+    this.rekord = parseInt(localStorage.getItem('svabeRekord'))
+    if (!this.rekord) this.rekord = 0
+  }
+  
   end() {
     super.end()
     mish.ukloniNishan()
