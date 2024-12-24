@@ -1,4 +1,6 @@
 // avion Potez 25
+// dodaj prozor na smrt
+// usporavanje unazad srediti
 
 import * as $ from 'konstante'
 import tipke from 'io/tipke'
@@ -15,10 +17,7 @@ import slikaRuina from 'slike/2d-bocno/zgrade/ruina.png'
 
 /*** KONFIG ***/
 
-const nivoTla = platno.height
-const zbunovi = []
-const oblaci = []
-const shume = []
+const NIVO_TLA = platno.height
 const BROJ_OBLAKA = 3
 const BROJ_ZBUNOVA = 10
 const BROJ_SHUME = 10
@@ -32,34 +31,40 @@ const MAX_UBRZANOST = 20
 const DIZAJ = 10
 const MAX_DIGNUTOST = 5555
 
+const zbunovi = []
+const oblaci = []
+const shume = []
 let ubrzanostScene = 0
 let dignutostScene = 0
 
 /*** INIT ***/
 
-const vozilo = new Hummel(nivoTla)
-const aerodrom = new Zgrada(nivoTla, slikaAerodrom)
-const ruina = new Zgrada(nivoTla, slikaRuina)
+const vozilo = new Hummel(NIVO_TLA)
+const aerodrom = new Zgrada(NIVO_TLA, slikaAerodrom)
+const ruina = new Zgrada(NIVO_TLA, slikaRuina)
 let igrac
 
 export default class Avionce1942 extends Scena {
   constructor() {
     super()
-    this.nivoTla = nivoTla
+    this.init()
+  }
+
+  init() {
     igrac = new AvionIgrac(this)
     ruina.x = -ruina.sirina
     ruina.procenatVracanja = 0.01
     aerodrom.procenatVracanja = 0.001
     // napraviti fabriku
-    for (let i = 0; i < BROJ_OBLAKA; i++) oblaci[i] = new Oblak()
-    for (let i = 0; i < BROJ_ZBUNOVA; i++) zbunovi[i] = new Zbun()
-    for (let i = 0; i < BROJ_SHUME; i++) shume[i] = new Shuma()
+    for (let i = 0; i < BROJ_OBLAKA; i++) oblaci.push(new Oblak())
+    for (let i = 0; i < BROJ_ZBUNOVA; i++) zbunovi.push(new Zbun())
+    for (let i = 0; i < BROJ_SHUME; i++) shume.push(new Shuma())
     this.dodaj(igrac, vozilo, aerodrom, ruina, ...oblaci, ...zbunovi, ...shume)
     this.pocniParalax()
   }
-
+  
   update() {
-    this.crtaNebo(this.nivoTla + dignutostScene, 'blue', 'lightblue', dignutostScene)
+    this.crtaNebo(NIVO_TLA + dignutostScene, 'blue', 'lightblue', dignutostScene)
     super.update()
     this.proveriTipke()
     vozilo.patroliraj()

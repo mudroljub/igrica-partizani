@@ -1,4 +1,4 @@
-// logove u regularne poruke
+// uravnotežiti sa delta time
 // da se ubrzava
 // animirati švabu kako se dize i pada
 // da se ne sudaraju?
