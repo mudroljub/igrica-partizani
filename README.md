@@ -27,9 +27,10 @@ P.S. ako izbacuje grešku proveri jel već pokrenut webpack-dev-server.
 
 ## TODO:
 
+- prosleđivati ui svakoj sceni?
 - napraviti jasan interfejs za Scene
-- prosleđivati managera i ui svakoj sceni?
 - upozorenje na back napuštate igru
+- ukloniti submodule??
 
 ### Faza 1: refaktor i sredjivanje
 - Avionce: promeniti zvuk motora
