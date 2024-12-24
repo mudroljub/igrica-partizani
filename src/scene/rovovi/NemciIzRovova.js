@@ -93,7 +93,7 @@ export default class NemciIzRovova extends Scena {
     this.stop()
     let poruka = 'Hrabro si pao. '
     if (this.pogoci > this.rekord) {
-      poruka += 'Ubio si ' + this.pogoci + ' okupatora. To je novi rekord!'
+      poruka += `Ubio si ${this.pogoci} okupatora. To je novi rekord!`
       localStorage.setItem('svabeRekord', this.pogoci)
     }
     this.ui.endScreen(this.manager, poruka, 'NemciIzRovova')
