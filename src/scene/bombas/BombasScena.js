@@ -1,8 +1,10 @@
+// prepreke da budu nagazne mine ili nešto opasno
 // sukcesivno se povećava broj prepreka i težina igre
 // svaki nivo novi random raspored, igrač igra dok ne izgubi
 // minimalno rastojanje bombaša i bunkera?
 // vremenski ograniceno?
 // mitraljez puca iz bunkera, prepreke su zakloni
+// BUG: popraviti bunker.gori()
 
 import Scena from 'core/Scena'
 import Vreme from 'core/Vreme'
@@ -92,7 +94,6 @@ export default class BombasScena extends Scena {
 
   zavrsiIgru(text) {
     this.stop()
-    const endScreen = this.manager.endScreen(text, 'BombasScena')
-    this.ui.dodaj(endScreen)
+    this.ui.endScreen(this.manager, text, 'BombasScena')
   }
 }

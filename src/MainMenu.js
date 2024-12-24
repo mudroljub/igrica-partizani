@@ -26,12 +26,11 @@ const sablon = () => {
   `
 }
 
-const ui = new UI(sablon, 'ui')
-
 export default class MainMenu extends Scena {
   constructor(manager) {
     super(manager)
     this.pustiScenu = this.pustiScenu.bind(this)
+    this.ui = new UI(sablon, 'ui')
   }
 
   start() {
@@ -48,10 +47,11 @@ export default class MainMenu extends Scena {
   end() {
     super.end()
     document.removeEventListener('click', this.pustiScenu)
+    this.ui.clear()
   }
 
   render() {
     super.render()
-    ui.render()
+    this.ui.render()
   }
 }

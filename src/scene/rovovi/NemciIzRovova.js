@@ -111,17 +111,14 @@ export default class NemciIzRovova extends Scena {
 
   proveriKraj() {
     if (energija < 1) {
-      sacuvajRekord()
       this.stop()
-      const endScreen = this.manager.endScreen('Play again...', 'NemciIzRovova')
-      console.log(endScreen) 
-      this.ui.dodaj(endScreen)
+      sacuvajRekord()
+      this.ui.endScreen(this.manager, 'Play again...', 'NemciIzRovova')
     }
   }
 
   end() {
     super.end()
     mish.ukloniNishan()
-    // TODO: ukloni klik
   }
 }
